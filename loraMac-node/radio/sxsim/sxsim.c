@@ -1,5 +1,6 @@
 #include <stdio.h>
+#include <board.h>
 
 void BoardRadioInit(){
-  printf("BoardRadioInit()\r\n");
+  printf("SIM0:BoardRadioInit()\r\n");
 }

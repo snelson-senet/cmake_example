@@ -1,28 +1,32 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(loramac)
+project(lora)
 
 # Set the output folder where your program will be created
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# Radio library
 add_library(radioLib "")
 
-add_library(sxsimLib "")
+# Board library
+add_library(boardLib "")
 
-add_library(sim0BoardLib "")
+# System library
+# add_library(systemLib "")
 
-add_library(classALib app/loramac/classA/main.c)
+# MAC library
+add_library(macLib "")
 
-add_executable(sim_pingpong app/PingPong/main.c)
-target_link_libraries(sim_pingpong radioLib sxsimLib sim0BoardLib)
+add_executable(pingpong app/PingPong/main.c)
+target_link_libraries(pingpong radioLib boardLib)
+
+# add_executable(classA app/loramac/classA/main.c)
+# target_link_libraries(classA macLib radioLib boardLib systemLib)
 
 # include_directories(radio)
 include(radio/CMakeLists.txt)
-include(radio/sxsim/CMakeLists.txt)
-include(boards/sim0/CMakeLists.txt)
+include(boards/CMakeLists.txt)
+include(mac/CMakeLists.txt)
 
-
-
-
-# target_link_libraries(pingpong radioLib)
-# target_link_libraries(classA radioLib)
+# include(boards/sim0/CMakeLists.txt)
+# include(boards/namote72/CMakeLists.txt)
