@@ -27,6 +27,12 @@
 *.i*86
 *.x86_64
 *.hex
+*.bin
 
 # Debug files
 *.dSYM/
+
+#cmake generated files
+CMake*
+cmake*
+Makefile*

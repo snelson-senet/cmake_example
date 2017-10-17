@@ -1,16 +1,14 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(classADemo)
+project(pingpong)
 
-#Set the output folder wher your program will be created
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
+# Set the output folder where your program will be created
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_subdirectory(mac)
 add_subdirectory(radio)
 
-include_directories(mac radio)
+include_directories(radio)
 
-add_executable(classADemo src/main.cpp)
+add_executable(pingpong app/PingPong/main.c)
 
-target_link_libraries(classADemo loramac)
-target_link_libraries(classADemo radio)
+target_link_libraries(pingpong radio)
