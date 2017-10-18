@@ -21,7 +21,7 @@ add_library(macLib "")
 add_library(systemLib "")
 
 add_executable(pingpong app/PingPong/main.c)
-target_link_libraries(pingpong radioLib boardLib)
+target_link_libraries(pingpong radioLib boardLib systemLib)
 
 
 # Build for SIM0 if board not set
