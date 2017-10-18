@@ -11,9 +11,6 @@ add_library(radioLib "")
 # Board library
 add_library(boardLib "")
 
-# System library
-# add_library(systemLib "")
-
 # MAC library
 add_library(macLib "")
 
@@ -22,7 +19,26 @@ add_library(systemLib "")
 
 add_executable(pingpong app/PingPong/main.c)
 target_link_libraries(pingpong radioLib boardLib systemLib)
+target_compile_definitions(pingpong PUBLIC -DUSE_MODEM_LORA)
 
+# Configure LoRaWAN Region
+if(NOT LORAWAN_REGION)
+  # MESSAGE(FATAL "Please define a REGION in top level CMakLists.txt")
+  set(LORAWAN_REGION "US915")
+  MESSAGE(STATUS "LORAWAN_REGION not defined, default is ${LORAWAN_REGION}")
+endif (NOT LORAWAN_REGION)
+
+if(LORAWAN_REGION STREQUAL "US915")
+  add_definitions(-DREGION_US915 )
+elseif(LORAWAN_REGION STREQUAL "US915_HYBRID")
+  add_definitions(-DREGION_US915_HYBRID)
+elseif(LORAWAN_REGION STREQUAL "EU868")
+  add_definitions(-DREGION_EU868)
+else(LORAWAN_REGION STREQUAL "US915")
+  MESSAGE(FATAL "Unknown LORAWAN_REGION= ${LORAWAN_REGION}")
+endif(LORAWAN_REGION STREQUAL "US915")
+
+MESSAGE(STATUS "LORAWAN_REGION=${LORAWAN_REGION}")
 
 # Build for SIM0 if board not set
 if(NOT BOARD_TYPE)
