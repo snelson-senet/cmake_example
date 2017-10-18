@@ -7,5 +7,6 @@ void BoardInit(){
 
 void BoardDisableIrq( void ) {}
 void BoardEnableIrq( void )  {}
-
-uint8_t GetBoardPowerSource( void ) { return USB_POWER; }    
+void BoardInitMcu( void )    {}
+void BoardInitPeriph( void ) {}
+uint8_t GetBoardPowerSource( void ) { return USB_POWER; }

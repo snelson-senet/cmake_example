@@ -3,7 +3,8 @@
 #include <stddef.h>
 #include <timer.h>
 
-#define BOARD_TYPE 1
+#define HAL_Delay( ms )
+
 void BoardInit();
 /*!
 * \brief Disable interrupts
@@ -18,6 +19,16 @@ void BoardDisableIrq( void );
 * \remark IRQ nesting is managed
 */
 void BoardEnableIrq( void );
+
+/*!
+* \brief Initializes the target board peripherals.
+*/
+void BoardInitMcu( void );
+
+/*!
+* \brief Initializes the boards peripherals.
+*/
+void BoardInitPeriph( void );
 
 /*!
 * Possible power sources
