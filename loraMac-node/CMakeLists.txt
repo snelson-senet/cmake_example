@@ -17,6 +17,9 @@ add_library(boardLib "")
 # MAC library
 add_library(macLib "")
 
+# System library
+add_library(systemLib "")
+
 add_executable(pingpong app/PingPong/main.c)
 target_link_libraries(pingpong radioLib boardLib)
 
@@ -34,6 +37,7 @@ endif(NOT BOARD_TYPE)
 include(radio/CMakeLists.txt)
 include(boards/CMakeLists.txt)
 include(mac/CMakeLists.txt)
+include(system/CMakeLists.txt)
 
 # include(boards/sim0/CMakeLists.txt)
 # include(boards/namote72/CMakeLists.txt)
