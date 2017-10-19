@@ -204,7 +204,7 @@ int main( void )
                         // Indicates on a LED that the received frame is a PONG
 #ifdef BOARD_LED1
                         GpioWrite( &Led1, GpioRead( &Led1 ) ^ 1 );
-#endif endif
+#endif 
 
                         // Send the next PING frame
                         Buffer[0] = 'P';
