@@ -50,6 +50,8 @@ add_executable(pingpong app/PingPong/main.c)
 target_link_libraries(pingpong radioLib boardLib systemLib)
 target_compile_definitions(pingpong PUBLIC -DUSE_MODEM_LORA)
 
+add_executable(blinky app/blinky/main.c)
+target_link_libraries(blinky boardLib systemLib)
 
 # add_executable(classA app/loramac/classA/main.c)
 # target_link_libraries(classA macLib radioLib boardLib systemLib)
