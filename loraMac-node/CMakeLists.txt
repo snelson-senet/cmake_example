@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(lora)
 
+include(helpers.cmake)
+
 # Defaults
 set(DEFAULT_BOARD_TYPE "NAMOTE72")
 set(DEFAULT_REGION "US915")
@@ -36,35 +38,44 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Peripheral library
 add_library(periphLib "")
+include(peripherals/CMakeLists.txt)
 
 # Radio library
 add_library(radioLib "")
+include(radio/CMakeLists.txt)
 
 # Board library
 add_library(boardLib "")
+include(boards/CMakeLists.txt)
 
 # MAC library
 add_library(macLib "")
+include(mac/CMakeLists.txt)
 
 # System library
 add_library(systemLib "")
+include(system/CMakeLists.txt)
 
+# LoRaMac Class A
+add_executable(classA "")
+include(app/loramac/classA/CMakeLists.txt)
+add_custom_command(TARGET classA
+  POST_BUILD
+  COMMAND $(CMAKE_OBJCOPY} ARGS -O binary ${CMAKE_BINARY_DIR}/classA ${CMAKE_BINARY_DIR}/classA.bin))
+
+# LoRaMac Class B
+add_executable(classB "")
+include(app/loramac/classB/CMakeLists.txt)
+
+# LoRaMac Class C
+add_executable(classC "")
+include(app/loramac/classC/CMakeLists.txt)
+
+# LoRa modem ping pong
 add_executable(pingpong app/PingPong/main.c)
 target_link_libraries(pingpong radioLib boardLib systemLib)
 target_compile_definitions(pingpong PUBLIC -DUSE_MODEM_LORA)
 
+# Simple LED blinky hello world test
 add_executable(blinky app/blinky/main.c)
 target_link_libraries(blinky boardLib systemLib)
-
-add_executable(classA app/loramac/classA/main.c)
-target_link_libraries(classA macLib radioLib boardLib systemLib periphLib)
-
-# include_directories(radio)
-include(radio/CMakeLists.txt)
-include(boards/CMakeLists.txt)
-include(mac/CMakeLists.txt)
-include(system/CMakeLists.txt)
-include(peripherals/CMakeLists.txt)
-
-# include(boards/sim0/CMakeLists.txt)
-# include(boards/namote72/CMakeLists.txt)
