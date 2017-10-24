@@ -11,3 +11,5 @@ target_sources(boardLib PUBLIC ${SOURCES})
 
 target_include_directories(boardLib PUBLIC ${CMAKE_CURRENT_LIST_DIR} )
 target_include_directories(boardLib PUBLIC ${CMAKE_CURRENT_LIST_DIR}/cmsis)
+
+target_link_libraries(boardLib periphLib)

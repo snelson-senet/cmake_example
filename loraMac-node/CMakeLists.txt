@@ -34,6 +34,9 @@ MESSAGE(STATUS "LORAWAN_REGION=${LORAWAN_REGION}")
 # Set the output folder where your program will be created
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# Peripheral library
+add_library(periphLib "")
+
 # Radio library
 add_library(radioLib "")
 
@@ -53,14 +56,15 @@ target_compile_definitions(pingpong PUBLIC -DUSE_MODEM_LORA)
 add_executable(blinky app/blinky/main.c)
 target_link_libraries(blinky boardLib systemLib)
 
-# add_executable(classA app/loramac/classA/main.c)
-# target_link_libraries(classA macLib radioLib boardLib systemLib)
+add_executable(classA app/loramac/classA/main.c)
+target_link_libraries(classA macLib radioLib boardLib systemLib periphLib)
 
 # include_directories(radio)
 include(radio/CMakeLists.txt)
 include(boards/CMakeLists.txt)
 include(mac/CMakeLists.txt)
 include(system/CMakeLists.txt)
+include(peripherals/CMakeLists.txt)
 
 # include(boards/sim0/CMakeLists.txt)
 # include(boards/namote72/CMakeLists.txt)

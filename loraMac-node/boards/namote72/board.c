@@ -141,16 +141,16 @@ void BoardInitPeriph( void )
     GpioInit( &ioPin, IRQ_MPL3115, PIN_INPUT, PIN_PUSH_PULL, PIN_NO_PULL, 1 );
 
     // Init temperature, pressure and altitude sensor
-    // MPL3115Init( );
+    MPL3115Init( );
 
     // Init accelerometer
-    // MMA8451Init( );
+    MMA8451Init( );
 
     // Init SAR
-    // SX9500Init( );
+    SX9500Init( );
 
     // Init GPS
-    // GpsInit( );
+    GpsInit( );
 
     // Switch LED 1, 2, 3, 4 OFF
     GpioWrite( &LedRed, 1 );
